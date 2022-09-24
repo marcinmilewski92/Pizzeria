@@ -34,7 +34,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("SinglePizzaOrdersSinglePizzaOrderId");
 
-                    b.ToTable("AdditionalIngredientSinglePizzaOrder");
+                    b.ToTable("AdditionalIngredientSinglePizzaOrder", (string)null);
                 });
 
             modelBuilder.Entity("BaseIngredientPizza", b =>
@@ -49,7 +49,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("PizzasPizzaId");
 
-                    b.ToTable("BaseIngredientPizza");
+                    b.ToTable("BaseIngredientPizza", (string)null);
                 });
 
             modelBuilder.Entity("Pizzeria.Domain.Entities.AdditionalIngredient", b =>
@@ -69,7 +69,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("AdditionalIngredientId");
 
-                    b.ToTable("AdditionalIngredients");
+                    b.ToTable("AdditionalIngredients", (string)null);
 
                     b.HasData(
                         new
@@ -120,7 +120,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("AddressId");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("Pizzeria.Domain.Entities.BaseIngredient", b =>
@@ -137,7 +137,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("BaseIngredientId");
 
-                    b.ToTable("BaseIngredients");
+                    b.ToTable("BaseIngredients", (string)null);
 
                     b.HasData(
                         new
@@ -186,7 +186,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("DeliveryAddressAddressId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Pizzeria.Domain.Entities.Pizza", b =>
@@ -212,7 +212,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("PizzaId");
 
-                    b.ToTable("Pizzas");
+                    b.ToTable("Pizzas", (string)null);
 
                     b.HasData(
                         new
@@ -256,7 +256,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("PizzaId");
 
-                    b.ToTable("SinglePizzaOrders");
+                    b.ToTable("SinglePizzaOrders", (string)null);
                 });
 
             modelBuilder.Entity("AdditionalIngredientSinglePizzaOrder", b =>

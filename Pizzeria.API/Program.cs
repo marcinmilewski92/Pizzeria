@@ -33,6 +33,8 @@ builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
 builder.Services.AddScoped<IBaseIngredientRepository, BaseIngredientRepository>();
 builder.Services.AddScoped<ISinglePizzaOrderRepository, SinglePizzaOrderRepository>();
 builder.Services.AddScoped<IAdditionalIngredientRepository, AdditionalIngredientsRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.ConfigureApplicationServices();
 

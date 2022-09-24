@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,6 +13,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pizzeria.Domain\Pizzeria.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Orders\Handlers\Queries\" />
+    <Folder Include="Features\Orders\Requests\Queries\" />
   </ItemGroup>
 
 </Project>
