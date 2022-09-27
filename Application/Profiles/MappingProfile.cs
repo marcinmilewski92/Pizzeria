@@ -27,6 +27,7 @@ namespace Application.Profiles
             CreateMap<SinglePizzaOrder, SinglePizzaOrderDto>().ReverseMap();
 
             CreateMap<Order, PlaceOrderDto>().ReverseMap();
+            CreateMap<Order, OrderDto>().ReverseMap();
 
             CreateMap<Address, AddressDto>().ReverseMap();
 

@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Orders;
 using Application.Features.Orders.Requests.Commands;
+using Application.Features.Orders.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,13 @@ namespace Pizzeria.API.Controllers
         {
             this._mediator = mediator;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<OrderDto>> Get(int id)
+        {
+            return await _mediator.Send(new GetOrderQuery() { Id = id });
+        }
+
 
         [HttpPost]
         public async Task<ActionResult<int?>> PlaceOrder(PlaceOrderDto placeOrderDto)

@@ -15,9 +15,4 @@
     <ProjectReference Include="..\Pizzeria.Domain\Pizzeria.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Orders\Handlers\Queries\" />
-    <Folder Include="Features\Orders\Requests\Queries\" />
-  </ItemGroup>
-
 </Project>

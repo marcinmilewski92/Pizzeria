@@ -1,0 +1,10 @@
+﻿using Application.DTOs.Orders;
+using MediatR;
+
+namespace Application.Features.Orders.Requests.Queries
+{
+    public class GetOrderQuery : IRequest<OrderDto>
+    {
+        public int Id { get; set; }
+    }
+}

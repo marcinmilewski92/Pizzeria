@@ -35,8 +35,9 @@ namespace Application.Features.Orders.Handlers.Commands
 
             request.PlaceOrderDto.SinglePizzaOrdersIds?.ForEach(i =>
             {
-
+                
                     singlePizzaOrders.Add(allSinglePizzaOrders.FirstOrDefault(o => o.SinglePizzaOrderId == i));
+                    
                 
             });
 
@@ -62,6 +63,9 @@ namespace Application.Features.Orders.Handlers.Commands
             orderNewAddress.DeliveryAddress.AddressId = 0;
 
             orderNewAddress = await _orderRepository.Add(orderNewAddress);
+
+
+
             return orderNewAddress.OrderId;
 
 
