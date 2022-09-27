@@ -19,7 +19,7 @@
         public Pizza Pizza { get; set; } = default!;
         public IEnumerable<AdditionalIngredient?> AdditionalIngredients { get; set; }
 
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
 
         public SinglePizzaOrder()
         {

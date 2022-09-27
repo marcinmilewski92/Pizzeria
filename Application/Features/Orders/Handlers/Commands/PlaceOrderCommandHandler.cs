@@ -43,6 +43,7 @@ namespace Application.Features.Orders.Handlers.Commands
 
             var address = request.PlaceOrderDto.DeliveryAddress;
 
+            Order order;
             
             //if addresses are "equal" including id use existing database address record
             if (address != null && address.AddressId != null && address.AddressId != 0)
@@ -50,23 +51,47 @@ namespace Application.Features.Orders.Handlers.Commands
                 var existingAddress = await _addressRepository.Get(address.AddressId.Value);
                 if (existingAddress.AddressCompare(address))
                 {
-                    var order = new Order() { DeliveryAddress = existingAddress, SinglePizzaOrders = singlePizzaOrders };
+                    order = new Order() { DeliveryAddress = existingAddress, SinglePizzaOrders = singlePizzaOrders };
 
                     order = await _orderRepository.Add(order);
-                    return order.OrderId;
+                }
+                else
+                {
+                    order = new Order() { DeliveryAddress = _mapper.Map<Address>(request.PlaceOrderDto.DeliveryAddress) };
+                    order.DeliveryAddress.AddressId = 0;
+
+                    order = await _orderRepository.Add(order);
                 }
             }
+            else
+            {
+                order = new Order() { DeliveryAddress = _mapper.Map<Address>(request.PlaceOrderDto.DeliveryAddress) };
+                order.DeliveryAddress.AddressId = 0;
+
+                order = await _orderRepository.Add(order);
+            }
+
 
             //if addresses are not "equal" including id => creating new database address record
 
-            var orderNewAddress = new Order() { DeliveryAddress = _mapper.Map<Address>(request.PlaceOrderDto.DeliveryAddress) };
-            orderNewAddress.DeliveryAddress.AddressId = 0;
-
-            orderNewAddress = await _orderRepository.Add(orderNewAddress);
 
 
+            request.PlaceOrderDto.SinglePizzaOrdersIds?.ForEach(i =>
+            {
+               
+                var sPOO = allSinglePizzaOrders.FirstOrDefault(o => o.SinglePizzaOrderId == i);
+                if(sPOO.OrderId == null)
+                {
+                    sPOO.OrderId = order.OrderId;
+                    _singlePizzaOrderRepository.Update(sPOO);
+                }
 
-            return orderNewAddress.OrderId;
+
+
+            });
+
+
+            return order.OrderId;
 
 
         }
