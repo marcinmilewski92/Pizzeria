@@ -1,7 +1,7 @@
 ﻿using Application.DTOs.AddressDtos;
 using Application.DTOs.SinglePizzaOrderDtos;
 
-namespace Application.DTOs.Orders
+namespace Application.DTOs.OrdersDtos
 {
     public class OrderDto
     {

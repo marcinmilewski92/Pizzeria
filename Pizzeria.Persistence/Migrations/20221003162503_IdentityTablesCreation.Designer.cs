@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pizzeria.Persistence;
 
@@ -11,9 +12,10 @@ using Pizzeria.Persistence;
 namespace Pizzeria.Persistence.Migrations
 {
     [DbContext(typeof(PizzeriaDbContext))]
-    partial class PizzeriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221003162503_IdentityTablesCreation")]
+    partial class IdentityTablesCreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,22 +79,6 @@ namespace Pizzeria.Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1a419fb8-2e2e-4169-bcc7-cd9a7a9a4b34",
-                            ConcurrencyStamp = "763577d2-8687-485d-ac02-bc444422c6fa",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "039cb4ca-edd3-49a1-b0f6-a7d6496204d1",
-                            ConcurrencyStamp = "f386edc7-f19f-48b4-bdc4-d412a4156419",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,10 +322,6 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.Property<bool>("IsDelivered")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OrderId");
 

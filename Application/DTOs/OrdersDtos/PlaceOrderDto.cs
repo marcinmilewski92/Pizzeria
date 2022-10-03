@@ -1,6 +1,6 @@
 ﻿using Application.DTOs.AddressDtos;
 
-namespace Application.DTOs.Orders
+namespace Application.DTOs.OrdersDtos
 {
     public class PlaceOrderDto
     {

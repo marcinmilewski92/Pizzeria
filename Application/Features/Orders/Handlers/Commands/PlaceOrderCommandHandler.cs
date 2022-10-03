@@ -1,5 +1,4 @@
-﻿using Application.DTOs.Orders;
-using Application.Features.Orders.Requests.Commands;
+﻿using Application.Features.Orders.Requests.Commands;
 using Application.Persistence.Contracts;
 using AutoMapper;
 using MediatR;

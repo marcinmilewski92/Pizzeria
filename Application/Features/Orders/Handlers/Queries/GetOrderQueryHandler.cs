@@ -1,4 +1,4 @@
-﻿using Application.DTOs.Orders;
+﻿using Application.DTOs.OrdersDtos;
 using Application.Features.Orders.Requests.Queries;
 using Application.Persistence.Contracts;
 using AutoMapper;
