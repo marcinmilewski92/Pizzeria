@@ -18,7 +18,7 @@ namespace Pizzeria.API.Controllers
             this._mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<OrderDto>> Get(int id)
         {
             return await _mediator.Send(new GetOrderQuery() { Id = id });
