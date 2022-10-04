@@ -1,4 +1,4 @@
-﻿using Application.DTOs.Orders;
+﻿using Application.DTOs.OrdersDtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,8 @@ namespace Application.Features.Orders.Requests.Commands
 {
     public class PlaceOrderCommand : IRequest<int?>
     {
-        public PlaceOrderDto PlaceOrderDto { get; set; }
+        public PlaceOrderDto PlaceOrderDto { get; set; } = default!;
+
+        public string UserId { get; set; } = string.Empty;
     }
 }

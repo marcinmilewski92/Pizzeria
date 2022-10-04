@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Pizzeria.Domain.Entities;
+using Pizzeria.Domain.Identity;
 
 namespace Pizzeria.Persistence
 {
-    public class PizzeriaDbContext : DbContext
+    public class PizzeriaDbContext : IdentityDbContext<User>
     {
         public PizzeriaDbContext(DbContextOptions<PizzeriaDbContext> options) : base(options)
         { 

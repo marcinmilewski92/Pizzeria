@@ -17,14 +17,14 @@ namespace Pizzeria.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<PizzaListDto>>> Get()
+        public async Task<ActionResult<List<PizzaListDto>>> GetPizzas()
         {
             var pizzas = await _mediator.Send(new GetPizzaListQuery());
             return Ok(pizzas);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PizzaDto>> Get(int id)
+        public async Task<ActionResult<PizzaDto>> GePizza(int id)
         {
             var pizza = await _mediator.Send(new GetPizzaByIdQuery() { Id = id });
             return Ok(pizza);

@@ -3,9 +3,8 @@ using MediatR;
 
 namespace Application.Features.Orders.Requests.Queries
 {
-    public class GetOrderQuery : IRequest<OrderDto>
+    public class GetUsersOrders : IRequest<List<UsersOrdersDto>>
     {
-        public int Id { get; set; }
         public string UserId { get; set; } = string.Empty;
     }
 }

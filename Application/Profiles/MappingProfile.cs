@@ -1,12 +1,14 @@
 ﻿using Application.DTOs.AdditionalIngedietDtos;
 using Application.DTOs.AddressDtos;
 using Application.DTOs.BaseIngredientDtos;
-using Application.DTOs.Orders;
+using Application.DTOs.OrdersDtos;
 using Application.DTOs.PizzaDtos;
 using Application.DTOs.SinglePizzaOrder;
 using Application.DTOs.SinglePizzaOrderDtos;
+using Application.DTOs.UsersDtos;
 using AutoMapper;
 using Pizzeria.Domain.Entities;
+using Pizzeria.Domain.Identity;
 
 namespace Application.Profiles
 {
@@ -28,10 +30,13 @@ namespace Application.Profiles
 
             CreateMap<Order, PlaceOrderDto>().ReverseMap();
             CreateMap<Order, OrderDto>().ReverseMap();
+            CreateMap<Order, UsersOrdersDto>().ReverseMap();
 
             CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<UserAddress, RegisterAddressDto>().ReverseMap();
+            
 
-
+            CreateMap<User, RegisterUserDto>().ReverseMap();
 
 
         }

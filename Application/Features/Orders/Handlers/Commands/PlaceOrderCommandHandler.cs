@@ -1,5 +1,4 @@
-﻿using Application.DTOs.Orders;
-using Application.Features.Orders.Requests.Commands;
+﻿using Application.Features.Orders.Requests.Commands;
 using Application.Persistence.Contracts;
 using AutoMapper;
 using MediatR;
@@ -35,8 +34,16 @@ namespace Application.Features.Orders.Handlers.Commands
 
             request.PlaceOrderDto.SinglePizzaOrdersIds?.ForEach(i =>
             {
-
-                singlePizzaOrders.Add(allSinglePizzaOrders.FirstOrDefault(o => o.SinglePizzaOrderId == i));
+                if(allSinglePizzaOrders != null)
+                {
+                    var singlePizzaOrder = allSinglePizzaOrders.FirstOrDefault(o => o.SinglePizzaOrderId == i);
+                    if(singlePizzaOrder != null)
+                    {
+                        singlePizzaOrders.Add(singlePizzaOrder);
+                    }
+                    
+                }
+                
 
 
             });
@@ -49,13 +56,16 @@ namespace Application.Features.Orders.Handlers.Commands
             if (address != null && address.AddressId != null && address.AddressId != 0)
             {
                 var existingAddress = await _addressRepository.Get(address.AddressId.Value);
-                if (existingAddress.AddressCompare(address))
+
+                if (existingAddress != null && existingAddress.AddressCompare(address))
                 {
                     order = new Order()
                     {
                         DeliveryAddress = existingAddress,
                         SinglePizzaOrders = singlePizzaOrders,
-                        DateCreated = request.PlaceOrderDto.DateCreated
+                        DateCreated = request.PlaceOrderDto.DateCreated,
+                        UserId = request.UserId
+                        
                     };
 
                     order = await _orderRepository.Add(order);
@@ -67,7 +77,8 @@ namespace Application.Features.Orders.Handlers.Commands
                 {
                     DeliveryAddress = _mapper.Map<Address>(request.PlaceOrderDto.DeliveryAddress),
                     SinglePizzaOrders = singlePizzaOrders,
-                    DateCreated = request.PlaceOrderDto.DateCreated
+                    DateCreated = request.PlaceOrderDto.DateCreated,
+                    UserId= request.UserId
                 };
                 order.DeliveryAddress.AddressId = 0;
 

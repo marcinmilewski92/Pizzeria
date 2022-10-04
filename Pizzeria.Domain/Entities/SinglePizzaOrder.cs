@@ -8,12 +8,12 @@
         {
             get
             {
-                try
+
+                if (AdditionalIngredients.Any())
                 {
                     return CurrentPizzaPrice + AdditionalIngredients.Select(i => i.Price).Sum();
-
                 }
-                catch { return CurrentPizzaPrice; }
+                return CurrentPizzaPrice;
             }
         }
         public Pizza Pizza { get; set; } = default!;
