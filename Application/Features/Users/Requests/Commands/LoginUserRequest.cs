@@ -3,8 +3,8 @@ using MediatR;
 
 namespace Application.Features.Users.Requests.Commands
 {
-    public class LoginUserRequest : IRequest<AuthResponseDto>
+    public class LoginUserRequest : IRequest<AuthResponseDto?>
     {
-        public LoginUserDto UserDto { get; set; }
+        public LoginUserDto UserDto { get; set; } = default!;
     }
 }

@@ -10,6 +10,8 @@ namespace Application.Features.Orders.Requests.Commands
 {
     public class PlaceOrderCommand : IRequest<int?>
     {
-        public PlaceOrderDto PlaceOrderDto { get; set; }
+        public PlaceOrderDto PlaceOrderDto { get; set; } = default!;
+
+        public string UserId { get; set; } = string.Empty;
     }
 }

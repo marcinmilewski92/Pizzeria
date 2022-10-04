@@ -19,7 +19,7 @@ namespace Pizzeria.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<SinglePizzaOrderDto>> Get(int id)
+        public async Task<ActionResult<SinglePizzaOrderDto>> GetSinglePizzaOrder(int id)
         {
             var singlePizzaOrder = await _mediator.Send(new GetSinglePizzaOrderQuery() { SinglePizzaOrderId = id });
 
@@ -32,7 +32,7 @@ namespace Pizzeria.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int?>> Create(SinglePizzaOrderCreateDto singlePizzaOrderCreateDto)
+        public async Task<ActionResult<int?>> CreateSinglePizzaOrder(SinglePizzaOrderCreateDto singlePizzaOrderCreateDto)
         {
             var singlePizzaOrderId = await _mediator.Send(new CreateSinglePizzaOrderCommand() { SinglePizzaOrderCreateDto = singlePizzaOrderCreateDto});
             if(singlePizzaOrderId == null)

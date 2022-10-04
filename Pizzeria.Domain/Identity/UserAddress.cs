@@ -4,6 +4,6 @@ namespace Pizzeria.Domain.Identity
 {
     public class UserAddress : Address
     {
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
     }
 }

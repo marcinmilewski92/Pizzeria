@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pizzeria.Persistence;
 
@@ -11,9 +12,10 @@ using Pizzeria.Persistence;
 namespace Pizzeria.Persistence.Migrations
 {
     [DbContext(typeof(PizzeriaDbContext))]
-    partial class PizzeriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221004135314_AddedUserIdToOrder")]
+    partial class AddedUserIdToOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("SinglePizzaOrdersSinglePizzaOrderId");
 
-                    b.ToTable("AdditionalIngredientSinglePizzaOrder", (string)null);
+                    b.ToTable("AdditionalIngredientSinglePizzaOrder");
                 });
 
             modelBuilder.Entity("BaseIngredientPizza", b =>
@@ -49,7 +51,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("PizzasPizzaId");
 
-                    b.ToTable("BaseIngredientPizza", (string)null);
+                    b.ToTable("BaseIngredientPizza");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -218,7 +220,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("AdditionalIngredientId");
 
-                    b.ToTable("AdditionalIngredients", (string)null);
+                    b.ToTable("AdditionalIngredients");
 
                     b.HasData(
                         new
@@ -273,7 +275,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("AddressId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Address");
                 });
@@ -292,7 +294,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("BaseIngredientId");
 
-                    b.ToTable("BaseIngredients", (string)null);
+                    b.ToTable("BaseIngredients");
 
                     b.HasData(
                         new
@@ -345,7 +347,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("DeliveryAddressAddressId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Pizzeria.Domain.Entities.Pizza", b =>
@@ -371,7 +373,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("PizzaId");
 
-                    b.ToTable("Pizzas", (string)null);
+                    b.ToTable("Pizzas");
 
                     b.HasData(
                         new
@@ -415,7 +417,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("PizzaId");
 
-                    b.ToTable("SinglePizzaOrders", (string)null);
+                    b.ToTable("SinglePizzaOrders");
                 });
 
             modelBuilder.Entity("Pizzeria.Domain.Identity.User", b =>

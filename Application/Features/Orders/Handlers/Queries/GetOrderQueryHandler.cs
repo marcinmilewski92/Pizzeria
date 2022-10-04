@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Orders.Handlers.Queries
 {
-    public class GetOrderQueryHandler : IRequestHandler<GetOrderQuery, OrderDto>
+    public class GetOrderQueryHandler : IRequestHandler<GetOrderQuery, OrderDto?>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
@@ -21,9 +21,14 @@ namespace Application.Features.Orders.Handlers.Queries
             this._orderRepository = orderRepository;
             this._mapper = mapper;
         }
-        public async Task<OrderDto> Handle(GetOrderQuery request, CancellationToken cancellationToken)
+        public async Task<OrderDto?> Handle(GetOrderQuery request, CancellationToken cancellationToken)
         {
             var order = await _orderRepository.GetOrderByIdWithDetail(request.Id);
+
+            if (order != null && order.UserId != request.UserId)
+            {
+                return null;
+            }
 
             var orderDto = _mapper.Map<OrderDto>(order);
 

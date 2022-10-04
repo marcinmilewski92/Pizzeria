@@ -1,8 +1,10 @@
 ﻿using Application.DTOs.UsersDtos;
 using Application.Persistence.Contracts;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Pizzeria.Domain.Entities;
 using Pizzeria.Domain.Identity;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,13 @@ namespace Pizzeria.Persistence.Repositories
             this._userManager = userManager;
             this._configuration = configuration;
         }
+
+        public async Task<List<Order>> GetUsersOreders(string userId)
+        {
+            var user = await _userManager.Users.Include(u => u.Orders).ThenInclude(o => o.DeliveryAddress).FirstOrDefaultAsync(u => u.Id == userId);
+            return user.Orders.ToList();
+        }
+
 
         public async Task<Dictionary<string, string>> Login(string email, string password)
         {
@@ -82,7 +91,7 @@ namespace Pizzeria.Persistence.Repositories
             var token = new JwtSecurityToken(
                 issuer: _configuration["JwtSettings:Issuer"],
                 audience: _configuration["JwtSettings:Audience"],
-                claims = claims,
+                claims : claims,
                 expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
                 signingCredentials: credentials
                 );

@@ -6,6 +6,6 @@ namespace Application.Features.Users.Requests.Commands
 {
     public class RegisterUserRequest : IRequest<IEnumerable<IdentityError>>
     {
-        public RegisterUserDto UserDto { get; set; }
+        public RegisterUserDto UserDto { get; set; } = default!;
     }
 }

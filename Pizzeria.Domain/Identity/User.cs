@@ -8,6 +8,6 @@ namespace Pizzeria.Domain.Identity
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public UserAddress UserAddress { get; set; } = new UserAddress();
-        IEnumerable<Order> Orders { get; set; } = new List<Order>();
+        public IEnumerable<Order> Orders { get; set; } = new List<Order>();
     }
 }

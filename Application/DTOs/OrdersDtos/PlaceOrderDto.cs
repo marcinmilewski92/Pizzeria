@@ -7,7 +7,6 @@ namespace Application.DTOs.OrdersDtos
         public AddressDto DeliveryAddress { get; set; } = default!;
         public List<int> SinglePizzaOrdersIds { get; set; }
         public DateTime DateCreated { get; set; }
-
         public PlaceOrderDto()
         {
             SinglePizzaOrdersIds = new List<int>();
