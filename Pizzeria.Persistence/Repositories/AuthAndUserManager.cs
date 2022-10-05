@@ -1,42 +1,37 @@
-﻿using Application.DTOs.UsersDtos;
-using Application.Persistence.Contracts;
+﻿using Application.Persistence.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Pizzeria.Domain.Entities;
 using Pizzeria.Domain.Identity;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Pizzeria.Persistence.Repositories
 {
-    public class AuthManager : IAuthManager
+    public class AuthAndUserManager : IAuthAndUserManager
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
-        public AuthManager(UserManager<User> userManager, IConfiguration configuration)
+        public AuthAndUserManager(UserManager<User> userManager, IConfiguration configuration)
         {
             this._userManager = userManager;
             this._configuration = configuration;
         }
 
-        public async Task<List<Order>> GetUsersOreders(string userId)
+        public async Task<List<Order>> GetUsersOreders(string userName)
         {
-            var user = await _userManager.Users.Include(u => u.Orders).ThenInclude(o => o.DeliveryAddress).FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _userManager.Users.Include(u => u.Orders).ThenInclude(o => o.DeliveryAddress).FirstOrDefaultAsync(u => u.UserName == userName);
             return user.Orders.ToList();
         }
 
 
-        public async Task<Dictionary<string, string>> Login(string email, string password)
+        public async Task<Dictionary<string, string>> Login(string userName, string password)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByNameAsync(userName);
             var validPassword = await _userManager.CheckPasswordAsync(user, password);
 
 
@@ -80,7 +75,7 @@ namespace Pizzeria.Persistence.Repositories
 
             var claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim("uid", user.Id)
@@ -94,6 +89,8 @@ namespace Pizzeria.Persistence.Repositories
                 claims : claims,
                 expires: DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["JwtSettings:DurationInMinutes"])),
                 signingCredentials: credentials
+                
+                
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(token);

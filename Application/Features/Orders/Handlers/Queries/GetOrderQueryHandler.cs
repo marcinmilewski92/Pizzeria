@@ -25,7 +25,7 @@ namespace Application.Features.Orders.Handlers.Queries
         {
             var order = await _orderRepository.GetOrderByIdWithDetail(request.Id);
 
-            if (order != null && order.UserId != request.UserId)
+            if (order != null && order.UserId != request.UserName)
             {
                 return null;
             }

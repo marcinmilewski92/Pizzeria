@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.OrdersDtos;
 using Application.Features.Orders.Requests.Commands;
 using Application.Features.Orders.Requests.Queries;
+using Application.Services.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,21 @@ namespace Pizzeria.API.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IUserService _userService;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public OrdersController(IMediator mediator)
+        public OrdersController(IMediator mediator, IUserService userService)
         {
             this._mediator = mediator;
+            this._userService = userService;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderDto>> GetOrder(int id)
         {
-            var userId = User.Claims.ElementAt(3).Value;
+            var userName = await _userService.GetUserName(HttpContext);
 
-            var order = await _mediator.Send(new GetOrderQuery() { Id = id, UserId = userId });
+            var order = await _mediator.Send(new GetOrderQuery() { Id = id, UserName = userName });
 
             if (order == null)
             {
@@ -36,14 +40,15 @@ namespace Pizzeria.API.Controllers
 
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<ActionResult<List<UsersOrdersDto>>> GetOrdersOfUser()
         {
-            var userId = User.Claims.ElementAt(3).Value;
+
+            var userName = await _userService.GetUserName(HttpContext);
 
             var orders = await _mediator.Send(new GetUsersOrders()
             {
-                UserId = userId
+                UserName = userName
             });
             return Ok(orders);
 

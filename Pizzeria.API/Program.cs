@@ -1,16 +1,14 @@
 using Application.Persistence.Contracts;
-using MediatR;
+using Application.Services.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PF.PizzaManagement.Application;
-using Pizzeria.Domain.Entities;
 using Pizzeria.Domain.Identity;
 using Pizzeria.Persistence;
 using Pizzeria.Persistence.Repositories;
-using System;
-using System.Reflection;
+using Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,10 +36,6 @@ builder.Services.AddCors(o =>
         .AllowAnyHeader());
 });
 
-
-
-
-
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
 builder.Services.AddScoped<IBaseIngredientRepository, BaseIngredientRepository>();
@@ -49,7 +43,8 @@ builder.Services.AddScoped<ISinglePizzaOrderRepository, SinglePizzaOrderReposito
 builder.Services.AddScoped<IAdditionalIngredientRepository, AdditionalIngredientsRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IAuthManager, AuthManager>();
+builder.Services.AddScoped<IAuthAndUserManager, AuthAndUserManager>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.ConfigureApplicationServices();
 

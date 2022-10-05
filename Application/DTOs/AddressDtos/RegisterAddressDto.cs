@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.DTOs.AddressDtos
+﻿namespace Application.DTOs.AddressDtos
 {
     public class RegisterAddressDto
     {

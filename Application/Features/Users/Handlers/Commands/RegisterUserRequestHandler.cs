@@ -8,10 +8,10 @@ namespace Application.Features.Users.Handlers.Commands
 {
     public class RegisterUserRequestHandler : IRequestHandler<RegisterUserRequest, IEnumerable<IdentityError>>
     {
-        private readonly IAuthManager _authManager;
+        private readonly IAuthAndUserManager _authManager;
         private readonly IMapper _mapper;
 
-        public RegisterUserRequestHandler(IAuthManager authManager, IMapper mapper)
+        public RegisterUserRequestHandler(IAuthAndUserManager authManager, IMapper mapper)
         {
             this._authManager = authManager;
             this._mapper = mapper;

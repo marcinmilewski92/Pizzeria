@@ -5,7 +5,7 @@ using Pizzeria.Domain.Identity;
 
 namespace Application.Persistence.Contracts
 {
-    public interface IAuthManager
+    public interface IAuthAndUserManager
     {
         Task<IEnumerable<IdentityError>> Register(User user, string password);
         Task<Dictionary<string, string>> Login(string username, string password);

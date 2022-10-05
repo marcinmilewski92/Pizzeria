@@ -7,9 +7,9 @@ namespace Application.Features.Users.Handlers.Commands
 {
     public class LoginUserRequestHandler : IRequestHandler<LoginUserRequest, AuthResponseDto?>
     {
-        private readonly IAuthManager _authManager;
+        private readonly IAuthAndUserManager _authManager;
 
-        public LoginUserRequestHandler(IAuthManager authManager)
+        public LoginUserRequestHandler(IAuthAndUserManager authManager)
         {
             this._authManager = authManager;
         }
