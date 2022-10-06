@@ -22,8 +22,9 @@ namespace Application.Features.Orders.Handlers.Commands
         }
         public async Task<int?> Handle(PlaceOrderCommand request, CancellationToken cancellationToken)
         {
+            var requestedSiglePizzaOrdersIds = request.PlaceOrderDto.SinglePizzaOrdersIds;
 
-            if (!request.PlaceOrderDto.SinglePizzaOrdersIds.Any())
+            if (!requestedSiglePizzaOrdersIds.Any())
             {
                 return null;
             }
@@ -32,7 +33,7 @@ namespace Application.Features.Orders.Handlers.Commands
             var allSinglePizzaOrders = await _singlePizzaOrderRepository.GetAll();
 
 
-            request.PlaceOrderDto.SinglePizzaOrdersIds?.ForEach(i =>
+            requestedSiglePizzaOrdersIds.ForEach(i =>
             {
                 if(allSinglePizzaOrders != null)
                 {
@@ -47,40 +48,41 @@ namespace Application.Features.Orders.Handlers.Commands
 
 
             });
+            if(requestedSiglePizzaOrdersIds.Count != singlePizzaOrders.Count)
+            {
+                return null!;
+            }
 
             var address = request.PlaceOrderDto.DeliveryAddress;
 
-            Order order;
+            var allAddresses = await _addressRepository.GetAllOrderAddresses();
 
-            //if addresses are "equal" including id use existing database address record
-            if (address != null && address.AddressId != null && address.AddressId != 0)
+            var existingAddressId = 0;
+
+            allAddresses.ToList().ForEach(a =>
             {
-                var existingAddress = await _addressRepository.Get(address.AddressId.Value);
-
-                if (existingAddress != null && existingAddress.AddressCompare(address))
+                if (a.AddressCompare(address))
                 {
-                    order = new Order()
-                    {
-                        DeliveryAddress = existingAddress,
-                        SinglePizzaOrders = singlePizzaOrders,
-                        DateCreated = request.PlaceOrderDto.DateCreated,
-                        UserId = request.UserId
-                        
-                    };
-
-                    order = await _orderRepository.Add(order);
-                    return order.OrderId;
+                    existingAddressId = a.AddressId;
                 }
-            }
 
-                order = new Order()
+            });
+
+
+                var order = new Order()
                 {
-                    DeliveryAddress = _mapper.Map<Address>(request.PlaceOrderDto.DeliveryAddress),
                     SinglePizzaOrders = singlePizzaOrders,
                     DateCreated = request.PlaceOrderDto.DateCreated,
                     UserId= request.UserId
                 };
-                order.DeliveryAddress.AddressId = 0;
+
+            if(existingAddressId == 0)
+            {
+                order.DeliveryAddress = _mapper.Map<Address>(request.PlaceOrderDto.DeliveryAddress);
+            } else
+            {
+                order.DeliveryAddress = allAddresses.FirstOrDefault(a => a.AddressId == existingAddressId)!;
+            }
 
                 order = await _orderRepository.Add(order);
 

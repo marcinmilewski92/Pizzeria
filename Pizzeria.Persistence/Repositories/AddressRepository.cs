@@ -1,5 +1,7 @@
 ﻿using Application.Persistence.Contracts;
+using Microsoft.EntityFrameworkCore;
 using Pizzeria.Domain.Entities;
+using Pizzeria.Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,11 @@ namespace Pizzeria.Persistence.Repositories
         public AddressRepository(PizzeriaDbContext context) : base(context)
         {
             this._context = context;
+        }
+
+        public async Task<IEnumerable<Address>> GetAllOrderAddresses()
+        {
+            return await _context.Addresses.Where(a => !(a is UserAddress)).ToListAsync();
         }
     }
 }

@@ -16,6 +16,9 @@ namespace Pizzeria.API.Controllers
             this._mediator = mediator;
         }
 
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
         public async Task<ActionResult<List<PizzaListDto>>> GetPizzas()
         {
@@ -23,10 +26,19 @@ namespace Pizzeria.API.Controllers
             return Ok(pizzas);
         }
 
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{id}")]
         public async Task<ActionResult<PizzaDto>> GePizza(int id)
         {
+
             var pizza = await _mediator.Send(new GetPizzaByIdQuery() { Id = id });
+            if(pizza == null)
+            {
+                return NotFound();
+            }
             return Ok(pizza);
         }
     }

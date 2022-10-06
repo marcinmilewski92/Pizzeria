@@ -19,6 +19,12 @@ namespace Application.Features.Pizzas.Handlers.Queries
         public async Task<PizzaDto> Handle(GetPizzaByIdQuery request, CancellationToken cancellationToken)
         {
             var pizza = await _pizzaRepository.GetPizzaWithBaseIngredients(request.Id);
+
+            if (pizza == null)
+            {
+                return null!;
+            }
+
             var pizzaDto = _mapper.Map<PizzaDto>(pizza);
 
             return pizzaDto;

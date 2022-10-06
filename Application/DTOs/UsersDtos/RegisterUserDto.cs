@@ -18,6 +18,6 @@ namespace Application.DTOs.UsersDtos
         public string LastName { get; set; } = string.Empty;
 
         [Required]
-        public RegisterAddressDto UserAddress { get; set; } = default!;
+        public CreateAddressDto UserAddress { get; set; } = default!;
     }
 }

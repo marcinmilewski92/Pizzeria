@@ -5,6 +5,6 @@ namespace Application.Features.SinglePizzaOrders.Requests.Commands
 {
     public class CreateSinglePizzaOrderCommand : IRequest<int?>
     {
-        public SinglePizzaOrderCreateDto SinglePizzaOrderCreateDto { get; set; }
+        public SinglePizzaOrderCreateDto SinglePizzaOrderCreateDto { get; set; } = new SinglePizzaOrderCreateDto();
     }
 }

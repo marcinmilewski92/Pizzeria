@@ -15,18 +15,12 @@ namespace Application.Features.SinglePizzaOrders.Handlers.Queries
     public class GetSinglePizzaOrderQueryHandler : IRequestHandler<GetSinglePizzaOrderQuery, SinglePizzaOrderDto>
     {
         private readonly ISinglePizzaOrderRepository _singlePizzaOrderRepository;
-        private readonly IPizzaRepository _pizzaRepository;
-        private readonly IAdditionalIngredientRepository _additionalIngredientRepository;
         private readonly IMapper _mapper;
 
-        public GetSinglePizzaOrderQueryHandler(ISinglePizzaOrderRepository singlePizzaOrderRepository, 
-            IPizzaRepository pizzaRepository, 
-            IAdditionalIngredientRepository addableIngredientRepository,
+        public GetSinglePizzaOrderQueryHandler(ISinglePizzaOrderRepository singlePizzaOrderRepository,
             IMapper mapper)
         {
             this._singlePizzaOrderRepository = singlePizzaOrderRepository;
-            this._pizzaRepository = pizzaRepository;
-            this._additionalIngredientRepository = addableIngredientRepository;
             this._mapper = mapper;
         }
         public async Task<SinglePizzaOrderDto> Handle(GetSinglePizzaOrderQuery request, CancellationToken cancellationToken)

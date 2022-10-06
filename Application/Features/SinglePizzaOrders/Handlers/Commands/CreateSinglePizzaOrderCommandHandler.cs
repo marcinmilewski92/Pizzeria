@@ -33,11 +33,11 @@ namespace Application.Features.SinglePizzaOrders.Handlers.Commands
 
             foreach(var requestIngredientId in request.SinglePizzaOrderCreateDto.AdditionalIngredientsIds)
             {
-                var ingId = await _additionalIngredientRepository.Get(requestIngredientId);
+                var ingridientFromDatabase = await _additionalIngredientRepository.Get(requestIngredientId);
 
-                if(ingId != null)
+                if(ingridientFromDatabase != null)
                 {
-                    addableIngredients.Add(ingId);
+                    addableIngredients.Add(ingridientFromDatabase);
                 }
                     
             }

@@ -1,6 +1,6 @@
 ﻿namespace Application.DTOs.AddressDtos
 {
-    public class AddressDto : RegisterAddressDto
+    public class AddressDto : CreateAddressDto
     {
         public int? AddressId { get; set; }
     }

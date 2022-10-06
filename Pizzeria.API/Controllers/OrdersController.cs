@@ -15,7 +15,6 @@ namespace Pizzeria.API.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IUserService _userService;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
         public OrdersController(IMediator mediator, IUserService userService)
         {
@@ -23,6 +22,11 @@ namespace Pizzeria.API.Controllers
             this._userService = userService;
         }
 
+
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderDto>> GetOrder(int id)
         {
@@ -40,6 +44,9 @@ namespace Pizzeria.API.Controllers
 
         }
 
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public async Task<ActionResult<List<UsersOrdersDto>>> GetOrdersOfUser()
         {
@@ -54,7 +61,9 @@ namespace Pizzeria.API.Controllers
 
         }
 
-
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
         public async Task<ActionResult<int?>> PlaceOrder(PlaceOrderDto placeOrderDto)
         {
@@ -62,9 +71,9 @@ namespace Pizzeria.API.Controllers
             {
                 return BadRequest();
             }
-            var userId = User.Claims.ElementAt(3).Value;
+            var userId = await _userService.GetUserId(HttpContext);
 
-            return await _mediator.Send(new PlaceOrderCommand() { PlaceOrderDto = placeOrderDto, UserId = userId });
+            return Ok(await _mediator.Send(new PlaceOrderCommand() { PlaceOrderDto = placeOrderDto, UserId = userId }));
         }
 
     }

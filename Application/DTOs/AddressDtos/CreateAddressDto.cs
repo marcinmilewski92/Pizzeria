@@ -1,6 +1,6 @@
 ﻿namespace Application.DTOs.AddressDtos
 {
-    public class RegisterAddressDto
+    public class CreateAddressDto
     {
         public string StreetName { get; set; } = string.Empty;
         public string HouseNumber { get; set; } = string.Empty;

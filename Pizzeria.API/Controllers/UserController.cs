@@ -19,6 +19,7 @@ namespace Pizzeria.API.Controllers
         }
         [HttpPost]
         [Route("Register")]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<IEnumerable<IdentityError>>> RegisterUser(RegisterUserDto userDto)
@@ -35,6 +36,7 @@ namespace Pizzeria.API.Controllers
 
         [HttpPost]
         [Route("Login")]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<AuthResponseDto>> LoginUser(LoginUserDto userDto)

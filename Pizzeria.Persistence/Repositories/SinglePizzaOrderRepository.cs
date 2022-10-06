@@ -19,7 +19,17 @@ namespace Pizzeria.Persistence.Repositories
         } 
         public async Task<SinglePizzaOrder> GetSinglePizzaOrderWithDetails(int id)
         {
-            return await _context.SinglePizzaOrders.Include(p => p.AdditionalIngredients).Include(p => p.Pizza).ThenInclude(p => p.BaseIngredients).FirstOrDefaultAsync(p => p.SinglePizzaOrderId == id);
+            var singlePizzaOrder = await _context.SinglePizzaOrders
+                .Include(p => p.AdditionalIngredients)
+                .Include(p => p.Pizza).ThenInclude(p => p.BaseIngredients)
+                .FirstOrDefaultAsync(p => p.SinglePizzaOrderId == id);
+
+            if(singlePizzaOrder == null)
+            {
+                return null!;
+            }
+
+            return singlePizzaOrder;
         }
     }
 }

@@ -33,7 +33,8 @@ namespace Application.Profiles
             CreateMap<Order, UsersOrdersDto>().ReverseMap();
 
             CreateMap<Address, AddressDto>().ReverseMap();
-            CreateMap<UserAddress, RegisterAddressDto>().ReverseMap();
+            CreateMap<Address, CreateAddressDto>().ReverseMap();
+            CreateMap<UserAddress, CreateAddressDto>().ReverseMap();
             
 
             CreateMap<User, RegisterUserDto>().ReverseMap();

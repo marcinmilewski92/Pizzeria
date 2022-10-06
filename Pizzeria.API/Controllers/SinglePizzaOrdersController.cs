@@ -18,6 +18,9 @@ namespace Pizzeria.API.Controllers
             this._mediator = mediator;
         }
 
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{id}")]
         public async Task<ActionResult<SinglePizzaOrderDto>> GetSinglePizzaOrder(int id)
         {
@@ -31,13 +34,16 @@ namespace Pizzeria.API.Controllers
             return Ok(singlePizzaOrder);
         }
 
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpPost]
         public async Task<ActionResult<int?>> CreateSinglePizzaOrder(SinglePizzaOrderCreateDto singlePizzaOrderCreateDto)
         {
             var singlePizzaOrderId = await _mediator.Send(new CreateSinglePizzaOrderCommand() { SinglePizzaOrderCreateDto = singlePizzaOrderCreateDto});
             if(singlePizzaOrderId == null)
             {
-                return BadRequest("Selected Pizza does not exist");
+                return BadRequest();
             }
             return Ok(singlePizzaOrderId);
         }

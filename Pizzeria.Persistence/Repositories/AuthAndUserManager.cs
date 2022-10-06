@@ -45,7 +45,7 @@ namespace Pizzeria.Persistence.Repositories
                     { "userId", user.Id },
                 };
             }
-            return null;
+            return null!;
         }
 
         public async Task<IEnumerable<IdentityError>> Register(User user, string password)

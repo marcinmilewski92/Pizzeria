@@ -9,7 +9,7 @@
             get
             {
 
-                if (AdditionalIngredients.Any())
+                if (AdditionalIngredients != null && AdditionalIngredients.Any())
                 {
                     return CurrentPizzaPrice + AdditionalIngredients.Select(i => i.Price).Sum();
                 }
@@ -17,7 +17,7 @@
             }
         }
         public Pizza Pizza { get; set; } = default!;
-        public IEnumerable<AdditionalIngredient?> AdditionalIngredients { get; set; }
+        public IEnumerable<AdditionalIngredient> AdditionalIngredients { get; set; }
 
         public int? OrderId { get; set; }
 
