@@ -22,9 +22,12 @@ namespace Pizzeria.Persistence.Repositories
             this._configuration = configuration;
         }
 
-        public async Task<List<Order>> GetUsersOreders(string userName)
+        public async Task<IEnumerable<Order>> GetUsersOreders(string userName)
         {
-            var user = await _userManager.Users.Include(u => u.Orders).ThenInclude(o => o.DeliveryAddress).FirstOrDefaultAsync(u => u.UserName == userName);
+            var user = await _userManager.Users
+                .Include(u => u.Orders).ThenInclude(o => o.SinglePizzaOrders).ThenInclude(spo => spo.AdditionalIngredients)
+                .Include(o => o.Orders).ThenInclude(o => o.SinglePizzaOrders).ThenInclude(spo => spo.Pizza)
+                .FirstOrDefaultAsync(u => u.UserName == userName);
             return user.Orders.ToList();
         }
 

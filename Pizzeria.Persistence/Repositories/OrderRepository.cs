@@ -24,8 +24,6 @@ namespace Pizzeria.Persistence.Repositories
                 .Include(o => o.SinglePizzaOrders).ThenInclude(po => po.AdditionalIngredients)
                 .Include(po => po.SinglePizzaOrders).ThenInclude(po => po.Pizza).ThenInclude(p => p.BaseIngredients)
                 .FirstOrDefaultAsync(o => o.OrderId == id);
-
-
         }
     }
 }

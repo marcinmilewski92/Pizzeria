@@ -9,6 +9,6 @@ namespace Application.Persistence.Contracts
     {
         Task<IEnumerable<IdentityError>> Register(User user, string password);
         Task<Dictionary<string, string>> Login(string username, string password);
-        Task<List<Order>> GetUsersOreders(string userId);
+        Task<IEnumerable<Order>> GetUsersOreders(string userId);
     }
 }

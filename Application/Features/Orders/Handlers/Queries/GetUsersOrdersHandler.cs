@@ -1,13 +1,10 @@
-﻿using Application.DTOs.OrdersDtos;
+﻿using Application.DTOs.AdditionalIngedietDtos;
+using Application.DTOs.OrdersDtos;
+using Application.DTOs.SinglePizzaOrderDtos;
 using Application.Features.Orders.Requests.Queries;
 using Application.Persistence.Contracts;
 using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Orders.Handlers.Queries
 {
@@ -25,7 +22,34 @@ namespace Application.Features.Orders.Handlers.Queries
         {
             var orders = await _authManager.GetUsersOreders(request.UserName);
 
-            return _mapper.Map<List<UsersOrdersDto>>(orders);
+            var ordersDto = new List<UsersOrdersDto>();
+
+            foreach (var order in orders)
+            {
+                var sprsDto = new List<SinglePizzaOrderForOrdersListDto>();
+                foreach (var singlePizzaOrder in order.SinglePizzaOrders)
+                {
+                    var sprDto = new SinglePizzaOrderForOrdersListDto
+                    {
+                        SinglePizzaOrderId = singlePizzaOrder.SinglePizzaOrderId,
+                        PizzaName = singlePizzaOrder.Pizza.Name,
+                        AdditionalIngredients = _mapper.Map<List<AdditionalIngredietDto>>(singlePizzaOrder.AdditionalIngredients),
+                        Price = singlePizzaOrder.Price,
+                    };
+                    sprsDto.Add(sprDto);
+                }
+
+                ordersDto.Add(new UsersOrdersDto
+                {
+                    OrderId = order.OrderId,
+                    DateCreated = order.DateCreated,
+                    SinglePizzaOrders = sprsDto,
+                    FinalPrice = order.FinalPrice,
+
+                });
+            }
+            return ordersDto;
+
             
         }
     }
