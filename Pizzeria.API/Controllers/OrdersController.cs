@@ -72,8 +72,12 @@ namespace Pizzeria.API.Controllers
                 return BadRequest();
             }
             var userId = await _userService.GetUserId(HttpContext);
-
-            return Ok(await _mediator.Send(new PlaceOrderCommand() { PlaceOrderDto = placeOrderDto, UserId = userId }));
+            var response = await _mediator.Send(new PlaceOrderCommand() { PlaceOrderDto = placeOrderDto, UserId = userId });
+            if(response == null)
+            {
+                return BadRequest();
+            }
+            return Ok(response);
         }
 
     }

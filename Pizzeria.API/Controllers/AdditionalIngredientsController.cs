@@ -16,10 +16,12 @@ namespace Pizzeria.API.Controllers
             this._mediator = mediator;
         }
 
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public async Task<ActionResult<List<AdditionalIngredietDto>>> GetAdditionalIngredients()
         {
-            return await _mediator.Send(new GetAdditionalIngredientsQuery());
+            return Ok(await _mediator.Send(new GetAdditionalIngredientsQuery()));
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Application.Features.Orders.Handlers.Commands
                 if(allSinglePizzaOrders != null)
                 {
                     var singlePizzaOrder = allSinglePizzaOrders.FirstOrDefault(o => o.SinglePizzaOrderId == i);
-                    if(singlePizzaOrder != null)
+                    if(singlePizzaOrder != null && singlePizzaOrder.OrderId == null)
                     {
                         singlePizzaOrders.Add(singlePizzaOrder);
                     }

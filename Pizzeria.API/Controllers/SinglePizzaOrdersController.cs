@@ -3,12 +3,14 @@ using Application.DTOs.SinglePizzaOrderDtos;
 using Application.Features.SinglePizzaOrders.Requests.Commands;
 using Application.Features.SinglePizzaOrders.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Pizzeria.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SinglePizzaOrdersController : ControllerBase
     {
         private readonly IMediator _mediator;
