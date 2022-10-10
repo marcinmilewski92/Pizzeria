@@ -13,6 +13,8 @@ Two default users has been seeded into app:
 * **admin@pizza.com** - **P@ssword1**
 * **user@pizza.com** - **P@ssword1**
 
+**I suggest you to use uploaded Postman Collection - PizzeriaApi.postman_collection.json**
+
 Steps:
 * Firstly, you need to check pizzas and additional ingredients and note their ids. You can do this without providing JWT token.
 * Then you can log in and place single pizza orders (you need to provide token in header, it's works for 30 minutes). Note it's ids you will get from api.
