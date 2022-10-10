@@ -34,22 +34,89 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("SinglePizzaOrdersSinglePizzaOrderId");
 
-                    b.ToTable("AdditionalIngredientSinglePizzaOrder", (string)null);
+                    b.ToTable("AdditionalIngredientSinglePizzaOrder");
                 });
 
             modelBuilder.Entity("BaseIngredientPizza", b =>
                 {
-                    b.Property<int>("BaseIngredientsBaseIngredientId")
+                    b.Property<int>("PizzaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PizzasPizzaId")
+                    b.Property<int>("BaseIngredientId")
                         .HasColumnType("int");
 
-                    b.HasKey("BaseIngredientsBaseIngredientId", "PizzasPizzaId");
+                    b.HasKey("PizzaId", "BaseIngredientId");
 
-                    b.HasIndex("PizzasPizzaId");
+                    b.HasIndex("BaseIngredientId");
 
-                    b.ToTable("BaseIngredientPizza", (string)null);
+                    b.ToTable("BaseIngredientPizza");
+
+                    b.HasData(
+                        new
+                        {
+                            PizzaId = 1,
+                            BaseIngredientId = 1
+                        },
+                        new
+                        {
+                            PizzaId = 1,
+                            BaseIngredientId = 2
+                        },
+                        new
+                        {
+                            PizzaId = 2,
+                            BaseIngredientId = 1
+                        },
+                        new
+                        {
+                            PizzaId = 2,
+                            BaseIngredientId = 2
+                        },
+                        new
+                        {
+                            PizzaId = 2,
+                            BaseIngredientId = 6
+                        },
+                        new
+                        {
+                            PizzaId = 2,
+                            BaseIngredientId = 8
+                        },
+                        new
+                        {
+                            PizzaId = 2,
+                            BaseIngredientId = 10
+                        },
+                        new
+                        {
+                            PizzaId = 3,
+                            BaseIngredientId = 1
+                        },
+                        new
+                        {
+                            PizzaId = 3,
+                            BaseIngredientId = 2
+                        },
+                        new
+                        {
+                            PizzaId = 3,
+                            BaseIngredientId = 3
+                        },
+                        new
+                        {
+                            PizzaId = 3,
+                            BaseIngredientId = 11
+                        },
+                        new
+                        {
+                            PizzaId = 3,
+                            BaseIngredientId = 12
+                        },
+                        new
+                        {
+                            PizzaId = 3,
+                            BaseIngredientId = 13
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -81,15 +148,15 @@ namespace Pizzeria.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b2755718-3ce0-4e7c-b8c1-4a7798db5c65",
-                            ConcurrencyStamp = "ab6a9552-c68a-4e81-b8a3-7e2af1933990",
+                            Id = "b1f97c6d-6b0f-4f27-b6c7-aa9a27ed8b0d",
+                            ConcurrencyStamp = "7c2792da-e8e4-426d-858a-7204c4e77c10",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "776bc71e-a922-4a00-8a80-5b98286d7b06",
-                            ConcurrencyStamp = "ba671cd5-b7f1-4b57-956a-56b6c2b1a517",
+                            Id = "5b2d14fc-852b-4e0b-81f9-3ac8393b0637",
+                            ConcurrencyStamp = "054f2dd7-1120-4d02-8a87-ac338bec5318",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -180,6 +247,18 @@ namespace Pizzeria.Persistence.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "b1f97c6d-6b0f-4f27-b6c7-aa9a27ed8b0e",
+                            RoleId = "b1f97c6d-6b0f-4f27-b6c7-aa9a27ed8b0d"
+                        },
+                        new
+                        {
+                            UserId = "5b2d14fc-852b-4e0b-81f9-3ac8393b0638",
+                            RoleId = "5b2d14fc-852b-4e0b-81f9-3ac8393b0637"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -218,20 +297,26 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("AdditionalIngredientId");
 
-                    b.ToTable("AdditionalIngredients", (string)null);
+                    b.ToTable("AdditionalIngredients");
 
                     b.HasData(
                         new
                         {
                             AdditionalIngredientId = 1,
-                            Name = "Kiełbasa",
-                            Price = 7m
+                            Name = "Sausage",
+                            Price = 3m
                         },
                         new
                         {
                             AdditionalIngredientId = 2,
-                            Name = "Rukola",
+                            Name = "Bacon",
                             Price = 4m
+                        },
+                        new
+                        {
+                            AdditionalIngredientId = 3,
+                            Name = "Parsley",
+                            Price = 2m
                         });
                 });
 
@@ -273,7 +358,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("AddressId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Address");
                 });
@@ -292,28 +377,68 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("BaseIngredientId");
 
-                    b.ToTable("BaseIngredients", (string)null);
+                    b.ToTable("BaseIngredients");
 
                     b.HasData(
                         new
                         {
                             BaseIngredientId = 1,
-                            Name = "Sos pomidorowy"
+                            Name = "Tomato sauce"
                         },
                         new
                         {
                             BaseIngredientId = 2,
-                            Name = "Ser"
+                            Name = "Mozzarella"
                         },
                         new
                         {
                             BaseIngredientId = 3,
-                            Name = "Szynka"
+                            Name = "Prosciutto"
                         },
                         new
                         {
                             BaseIngredientId = 4,
-                            Name = "Pieczarki"
+                            Name = "Mushrooms"
+                        },
+                        new
+                        {
+                            BaseIngredientId = 5,
+                            Name = "Basil"
+                        },
+                        new
+                        {
+                            BaseIngredientId = 6,
+                            Name = "Grana Padano"
+                        },
+                        new
+                        {
+                            BaseIngredientId = 7,
+                            Name = "Jalapeno"
+                        },
+                        new
+                        {
+                            BaseIngredientId = 8,
+                            Name = "Cherry tomatoes"
+                        },
+                        new
+                        {
+                            BaseIngredientId = 10,
+                            Name = "Arugula"
+                        },
+                        new
+                        {
+                            BaseIngredientId = 11,
+                            Name = "Capers"
+                        },
+                        new
+                        {
+                            BaseIngredientId = 12,
+                            Name = "Dried tomatoes"
+                        },
+                        new
+                        {
+                            BaseIngredientId = 13,
+                            Name = "Olives"
                         });
                 });
 
@@ -338,14 +463,15 @@ namespace Pizzeria.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("DeliveryAddressAddressId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Pizzeria.Domain.Entities.Pizza", b =>
@@ -371,24 +497,32 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasKey("PizzaId");
 
-                    b.ToTable("Pizzas", (string)null);
+                    b.ToTable("Pizzas");
 
                     b.HasData(
                         new
                         {
                             PizzaId = 1,
-                            Description = "Przyszna pizza z szynką",
+                            Description = "Classic Italian pizza.",
                             IsAvailable = true,
-                            Name = "Vesuviana",
+                            Name = "Margherita",
                             Price = 25.50m
                         },
                         new
                         {
                             PizzaId = 2,
-                            Description = "Pyszna pizza z szynką i pieczarkami",
+                            Description = "Delicious pizza with highest queality, fresh ingredients.",
                             IsAvailable = true,
-                            Name = "Capricciosa",
+                            Name = "Parma",
                             Price = 28m
+                        },
+                        new
+                        {
+                            PizzaId = 3,
+                            Description = "Delicious, saulty pizza. Perfect when you are very hungry.",
+                            IsAvailable = true,
+                            Name = "Capperi",
+                            Price = 27.50m
                         });
                 });
 
@@ -415,7 +549,7 @@ namespace Pizzeria.Persistence.Migrations
 
                     b.HasIndex("PizzaId");
 
-                    b.ToTable("SinglePizzaOrders", (string)null);
+                    b.ToTable("SinglePizzaOrders");
                 });
 
             modelBuilder.Entity("Pizzeria.Domain.Identity.User", b =>
@@ -489,6 +623,42 @@ namespace Pizzeria.Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "b1f97c6d-6b0f-4f27-b6c7-aa9a27ed8b0e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "8816298a-eecc-4828-a3ef-29ae879fc174",
+                            Email = "user@pizza.com",
+                            EmailConfirmed = false,
+                            FirstName = "",
+                            LastName = "",
+                            LockoutEnabled = false,
+                            NormalizedUserName = "USER@PIZZA.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAtO+NnczwINpeoj1erXPTwTf6NrP8iBDdL/NYj+xiVqnkznu3E2P/gEE+ZnwQoRjA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "45464b65-a2ec-43d6-9e6a-eb631b1f722c",
+                            TwoFactorEnabled = false,
+                            UserName = "user@pizza.com"
+                        },
+                        new
+                        {
+                            Id = "5b2d14fc-852b-4e0b-81f9-3ac8393b0638",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a6d87c60-9bf5-4961-b374-bcf7273acadd",
+                            Email = "admin@pizza.com",
+                            EmailConfirmed = false,
+                            FirstName = "",
+                            LastName = "",
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMIN@PIZZA.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAtO+NnczwINpeoj1erXPTwTf6NrP8iBDdL/NYj+xiVqnkznu3E2P/gEE+ZnwQoRjA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9d3c37b2-d097-4fbc-b8a5-732fae30c06d",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@pizza.com"
+                        });
                 });
 
             modelBuilder.Entity("Pizzeria.Domain.Identity.UserAddress", b =>
@@ -504,6 +674,30 @@ namespace Pizzeria.Persistence.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("UserAddress");
+
+                    b.HasData(
+                        new
+                        {
+                            AddressId = 1,
+                            ApartmentNumber = "default",
+                            City = "default",
+                            HouseNumber = "default",
+                            PhoneNumber = "default",
+                            PostalCode = "default",
+                            StreetName = "default",
+                            UserId = "b1f97c6d-6b0f-4f27-b6c7-aa9a27ed8b0e"
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            ApartmentNumber = "default",
+                            City = "default",
+                            HouseNumber = "default",
+                            PhoneNumber = "default",
+                            PostalCode = "default",
+                            StreetName = "default",
+                            UserId = "5b2d14fc-852b-4e0b-81f9-3ac8393b0638"
+                        });
                 });
 
             modelBuilder.Entity("AdditionalIngredientSinglePizzaOrder", b =>
@@ -525,13 +719,13 @@ namespace Pizzeria.Persistence.Migrations
                 {
                     b.HasOne("Pizzeria.Domain.Entities.BaseIngredient", null)
                         .WithMany()
-                        .HasForeignKey("BaseIngredientsBaseIngredientId")
+                        .HasForeignKey("BaseIngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Pizzeria.Domain.Entities.Pizza", null)
                         .WithMany()
-                        .HasForeignKey("PizzasPizzaId")
+                        .HasForeignKey("PizzaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -595,6 +789,10 @@ namespace Pizzeria.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Pizzeria.Domain.Identity.User", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("DeliveryAddress");
                 });
 
@@ -634,8 +832,9 @@ namespace Pizzeria.Persistence.Migrations
 
             modelBuilder.Entity("Pizzeria.Domain.Identity.User", b =>
                 {
-                    b.Navigation("UserAddress")
-                        .IsRequired();
+                    b.Navigation("Orders");
+
+                    b.Navigation("UserAddress");
                 });
 #pragma warning restore 612, 618
         }

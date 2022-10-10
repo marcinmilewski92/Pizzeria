@@ -12,14 +12,20 @@ namespace Pizzeria.Persistence.Configurations
                 new AdditionalIngredient()
                 {
                     AdditionalIngredientId = 1,
-                    Name = "Kiełbasa",
-                    Price = 7M
+                    Name = "Sausage",
+                    Price = 3M
                 },
                 new AdditionalIngredient()
                 {
                     AdditionalIngredientId = 2,
-                    Name = "Rukola",
+                    Name = "Bacon",
                     Price = 4M
+                },
+                new AdditionalIngredient()
+                {
+                    AdditionalIngredientId = 3,
+                    Name = "Parsley",
+                    Price = 2M
                 });
         }
     }

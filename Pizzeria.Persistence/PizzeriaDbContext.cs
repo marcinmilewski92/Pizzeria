@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Pizzeria.Domain.Entities;
 using Pizzeria.Domain.Identity;
+using Pizzeria.Persistence.Configurations;
+using static Pizzeria.Persistence.Configurations.RoleConfiguration;
 
 namespace Pizzeria.Persistence
 {
@@ -13,7 +15,18 @@ namespace Pizzeria.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PizzeriaDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new AdditionalIngredientsConfiguration());
+            modelBuilder.ApplyConfiguration(new BaseIngredientsConfiguration());
+            modelBuilder.ApplyConfiguration(new AddressConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new PizzaConfiguration());
+            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+
+
+
+
+            //   modelBuilder.ApplyConfigurationsFromAssembly(typeof(PizzeriaDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
 
