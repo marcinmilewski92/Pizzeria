@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "163b8c38-22c5-4788-a78a-9a892b53a17a",
+		"name": "PizzeriaApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18339949"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"tester\",\r\n  \"lastName\": \"tester\",\r\n  \"email\": \"tester@pizza.com\",\r\n  \"password\": \"P@ssword1\",\r\n  \"userAddress\": {\r\n    \"streetName\": \"NameOfTheStreet\",\r\n    \"houseNumber\": \"NumberOfTheHouse\",\r\n    \"apartmentNumber\": \"ApartmentNumber\",\r\n    \"postalCode\": \"PostalCode\",\r\n    \"city\": \"City\",\r\n    \"phoneNumber\": \"123456789\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7123/api/Users/Register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7123",
+					"path": [
+						"api",
+						"Users",
+						"Register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7123/api/Users/Login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7123",
+					"path": [
+						"api",
+						"Users",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPizzas",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetPizzaById",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetAdditionalIngredients",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Create SinglePizzaOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXJAcGl6emEuY29tIiwianRpIjoiYmU5NzQ3MDctNTM3ZC00NTdkLWIzMWMtZGFjZDRhNDNkYTE3IiwiZW1haWwiOiJ0ZXN0ZXJAcGl6emEuY29tIiwidWlkIjoiMDE4ZmRiMGQtNmI2Zi00MGFkLTk3YzMtYzkzOTAyNTE4MDE1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY2NTQyMTk2NCwiaXNzIjoiUGl6emVyaWFBUEkiLCJhdWQiOiJQaXp6ZXJpYUFQSUNsaWVudCJ9.p0eMyrsYe5_XLxA-hg2CRmKTvpENWHVsJR8PfbG6IWE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"pizzaId\": 2,\r\n  \"additionalIngredientsIds\": [\r\n    2,\r\n    3\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7123/api/SinglePizzaOrders",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7123",
+					"path": [
+						"api",
+						"SinglePizzaOrders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PlaceOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"deliveryAddress\": {\r\n    \"addressId\": 0,\r\n    \"streetName\": \"Pokatna\",\r\n    \"houseNumber\": \"14\",\r\n    \"apartmentNumber\": \"33\",\r\n    \"postalCode\": \"33-333\",\r\n    \"city\": \"Warsaw\",\r\n    \"phoneNumber\": \"123456789\"\r\n  },\r\n  \"singlePizzaOrdersIds\": [\r\n    6,\r\n    7\r\n  ],\r\n  \"dateCreated\": \"2022-10-03T14:35:25.587Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7123/api/Orders",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7123",
+					"path": [
+						"api",
+						"Orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser'sOrders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0ZXJAcGl6emEuY29tIiwianRpIjoiNjBkMDRiYTItZGU3OS00NjRhLWE2ODctY2YzYTUwNzFkODUyIiwiZW1haWwiOiJ0ZXN0ZXJAcGl6emEuY29tIiwidWlkIjoiMDE4ZmRiMGQtNmI2Zi00MGFkLTk3YzMtYzkzOTAyNTE4MDE1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY2NTQzMjkyMCwiaXNzIjoiUGl6emVyaWFBUEkiLCJhdWQiOiJQaXp6ZXJpYUFQSUNsaWVudCJ9.TvVoo63gkkjwT3N_vB3ha9UAQ-a7Z-tKT_dJ5eQOZuE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7123/api/Orders/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7123",
+					"path": [
+						"api",
+						"Orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrderById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwianRpIjoiYzU0ZWI5M2UtNWJhZS00YmM5LTgzY2YtMmZmNGVkYmRmYmM2IiwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwidWlkIjoiYjc1ZGMwNDAtZmYzNi00MzNiLWIzYWEtMGQ1ZmY1ZjI2MmM0IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTY2NDgzNjk5OSwiaXNzIjoiUGl6emVyaWFBUEkiLCJhdWQiOiJQaXp6ZXJpYUFQSUNsaWVudCJ9.ObhPIx3o77DMvmomIQ8qe7NShxaSendqMn6T3f-uLC0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7123/api/Orders/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7123",
+					"path": [
+						"api",
+						"Orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
